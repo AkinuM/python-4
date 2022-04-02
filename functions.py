@@ -1,14 +1,14 @@
 import re
 import statistics
-from constants import *
+import constants
 
 def split_words(text):
-    words = re.split(REGEX_WORDS, text)
+    words = re.split(constants.REGEX_WORDS, text)
 
     return [word for word in words if len(word) != 0]
 
 def split_sentences(text):
-    sentences = re.split(REGEX_SENTENCES, text)
+    sentences = re.split(constants.REGEX_SENTENCES, text)
 
     return [sentence for sentence in sentences if len(sentence) != 0]
 
