@@ -15,10 +15,20 @@ TUPLE = "tuple"
 BYTES = "bytes"
 SET = "set"
 DICT = "dict"
+CO_NAMES = "co_names"
+OBJECT = "object"
+FIELDS = "__fields__"
+OBJECT_TYPE = "__object_type__"
+MODULE = "module"
+BUILTINS = "__builtins__"
+DOC = "__doc__"
+FUNCTION = "function"
+DEFAULTS = "__defaults__"
 
 FUNC_ATTRIBUTES = [
     "__code__",
-    "__name__"
+    "__name__",
+    "__defaults__"
 ]
 
 NOT_CLASS_ATTRIBUTES = [
@@ -26,4 +36,23 @@ NOT_CLASS_ATTRIBUTES = [
     "__getattribute__",
     "__new__",
     "__setattr__",
+]
+
+CODE_ARGS = [
+    'co_argcount',
+    'co_posonlyargcount',
+    'co_kwonlyargcount',
+    'co_nlocals',
+    'co_stacksize',
+    'co_flags',
+    'co_code',
+    'co_consts',
+    'co_names',
+    'co_varnames',
+    'co_filename',
+    'co_name',
+    'co_firstlineno',
+    'co_lnotab',
+    'co_freevars',
+    'co_cellvars'
 ]

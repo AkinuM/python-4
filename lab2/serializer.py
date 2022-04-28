@@ -1,13 +1,14 @@
 import inspect
 from pydoc import locate
+from types import CodeType, FunctionType
 
 from constants import *
 
 
 def get_type(item):
-    itemtype = str(type(item))
+    item_type = str(type(item))
 
-    return itemtype[8:len(itemtype) - 2]
+    return item_type[8:len(item_type) - 2]
 
 
 def serialize(item):
@@ -32,7 +33,7 @@ def serialize(item):
     if isinstance(item, type(type.__dict__)):
         return serialize_instance(item)
 
-    return serialize_object
+    return serialize_object(item)
 
 
 def serialize_ifcbsn(item):
@@ -54,27 +55,12 @@ def serialize_dict(item):
 
 
 def serialize_object(item):
-    result = {TYPE: "object", VALUE: serialize({"__object_type__": get_type(item), "__fields__": item.__dict__})}
+    result = {TYPE: OBJECT, VALUE: serialize({OBJECT_TYPE: type(item), FIELDS: item.__dict__})}
 
     return result
 
 
 def serialize_function(item):
-    # members = inspect.getmembers(item)
-    # result = {TYPE: get_type(item)}
-    # value = {}
-    # for obj in members:
-    #     if obj[0] in FUNC_ATTRIBUTES:
-    #         value[obj[0]] = obj[1]
-    #     if obj[0] == GLOBALS:
-    #         value[GLOBALS] = {}
-    #         for obj2 in obj[1]:
-    #             if obj2 == item.__name__:
-    #                 value[GLOBALS][obj2] = item.__name__
-    #             else:
-    #                 value[GLOBALS][obj2] = obj[1][obj2]
-
-    # result[VALUE] = serialize(value)
     members = inspect.getmembers(item)
     result = {TYPE: get_type(item)}
     value = {}
@@ -82,7 +68,7 @@ def serialize_function(item):
         if obj[0] in FUNC_ATTRIBUTES:
             value[obj[0]] = (obj[1])
         if obj[0] == CODE:
-            co_names = obj[1].__getattribute__("co_names")
+            co_names = obj[1].__getattribute__(CO_NAMES)
             globs = item.__getattribute__(GLOBALS)
             value[GLOBALS] = {}
             for obj2 in co_names:
@@ -113,8 +99,8 @@ def serialize_code(item):
 
 
 def serialize_module(item):
-    tempitem = str(item)
-    result = {TYPE: get_type(item), VALUE: tempitem[9:len(tempitem) - 13]}
+    temp_item = str(item)
+    result = {TYPE: get_type(item), VALUE: temp_item[9:len(temp_item) - 13]}
 
     return result
 
@@ -138,16 +124,24 @@ def deserialize(item):
         return deserialize_ltsb(item)
     if item[TYPE] == DICT:
         return deserialize_dict(item)
+    if item[TYPE] == OBJECT:
+        return deserialize_object(item)
+    if item[TYPE] == MODULE:
+        return deserialize_module(item)
+    if item[TYPE] == CLASS:
+        return deserialize_class(item)
+    if item[TYPE] == FUNCTION:
+        return deserialize_function(item)
 
 
-def deserialize_ifcbsn(item):
+def deserialize_ifcbsn(item):  # done
     if item[TYPE] == NONE_TYPE:
         return None
 
     return locate(item[TYPE])(item[VALUE])
 
 
-def deserialize_ltsb(item):
+def deserialize_ltsb(item):  # done
     if item[TYPE] == LIST:
         return list(deserialize(obj) for obj in item[VALUE])
 
@@ -161,5 +155,64 @@ def deserialize_ltsb(item):
         return bytes(deserialize(obj) for obj in item[VALUE])
 
 
-def deserialize_dict(item):
+def deserialize_dict(item):  # done
     return {deserialize(obj[0]): deserialize(obj[1]) for obj in item[VALUE]}
+
+
+def deserialize_object(item): # done
+    value = deserialize(item[VALUE])
+    result = value[OBJECT_TYPE](**value[FIELDS])
+
+    for key, value in value[FIELDS].items():
+        result.key = value
+
+    return result
+
+
+def deserialize_module(item):  # done
+    return __import__(item[VALUE])
+
+
+def deserialize_class(item): # done
+    class_dict = deserialize(item[VALUE])
+    name = class_dict[NAME]
+    del class_dict[NAME]
+
+    return type(name, (object,), class_dict)
+
+
+def deserialize_code(item):  # done
+    objs = item[VALUE][VALUE]
+
+    for obj in objs:
+        if obj[0][VALUE] == CODE:
+            args = deserialize(obj[1][VALUE])
+            code_dict = {}
+            for arg in args:
+                arg_val = args[arg]
+                if arg != DOC:
+                    code_dict[arg] = arg_val
+
+            code_list = [0] * 16
+            for name in code_dict:
+                code_list[CODE_ARGS.index(name)] = code_dict[name]
+            return CodeType(*code_list)
+
+
+def deserialize_function(item):  # done
+    result_dict = deserialize(item[VALUE])
+    result_dict["code"] = deserialize_code(item)
+    result_dict.pop(CODE)
+    result_dict[GLOBALS][BUILTINS] = __builtins__
+    result_dict["globals"] = result_dict[GLOBALS]
+    result_dict.pop(GLOBALS)
+    result_dict["name"] = result_dict[NAME]
+    result_dict.pop(NAME)
+    result_dict["argdefs"] = result_dict[DEFAULTS]
+    result_dict.pop(DEFAULTS)
+
+    result = FunctionType(**result_dict)
+    if result.__name__ in result.__getattribute__(GLOBALS):
+        result.__getattribute__(GLOBALS)[result.__name__] = result
+
+    return result
