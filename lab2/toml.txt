@@ -1,0 +1,1 @@
+dict = ['type'= 'dict', 'value'= ((['type'= 'str', 'value'= 'a'], ['type'= 'list', 'value'= (['type'= 'int', 'value'= 5])]), (['type'= 'int', 'value'= 4], ['type'= 'tuple', 'value'= (['type'= 'int', 'value'= 6])]))]
