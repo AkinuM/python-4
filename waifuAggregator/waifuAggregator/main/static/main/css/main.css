@@ -1,0 +1,51 @@
+body {
+    background: blue;
+}
+
+aside {
+    float: left;
+    background: aqua;
+    width: 30%;
+    padding: 2.5%;
+    height: 100vh;
+    color: white;
+    border-right: 5px solid black;
+}
+
+aside img {
+    width: 200px;
+    float: left;
+}
+
+aside .peg {
+    font-size: 40px;
+    margin-left: 10px;
+    font-weight: bold;
+    position: relative;
+    top: -5px;
+}
+
+aside h3 {
+    margin-top: 50px;
+    font-size: 40px;
+}
+
+aside ul {
+    list-style: none;
+}
+
+aside ul li {
+    color: black;
+    display: block;
+    margin-top: 20px;
+    transition: transform .6s ease;
+}
+
+aside ul li:hover, aside ul a:hover {
+    color: white;
+    transform: scale(1.2);
+}
+
+main {
+    color: white;
+}
