@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block aboba2 %}
+    <dev class="features">
+        <h1>delete_peg</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-success" type="submit">Delete peg</button>
+        </form>
+    </dev>
+{% endblock %}
+
+{% block aboba1 %}
+    Delete peg
+{% endblock %}

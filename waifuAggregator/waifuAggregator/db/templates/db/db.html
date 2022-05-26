@@ -4,7 +4,9 @@
     <h1>db_for_peg</h1>
     <p>aboba2</p>
     {% for el in peges %}
-    {{ el.weight }}
+    {{ el.name }}<br>
+    {{ el.weight }} kg<br>
+    <a href="{% url 'db-detail' el.id %}" class="btn btn-warning">go to peg</a><br>
     {% endfor %}
 {% endblock %}
 

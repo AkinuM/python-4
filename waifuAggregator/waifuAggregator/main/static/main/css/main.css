@@ -13,7 +13,7 @@ aside {
 }
 
 aside img {
-    width: 300px;
+    width: 200px;
     float: left;
 }
 
@@ -48,4 +48,10 @@ aside ul li:hover, aside ul a:hover {
 
 main {
     color: white;
+}
+
+form {
+    width: 500px;
+    margin-left: 32%;
+    margin-top: 50px;
 }

@@ -1,0 +1,12 @@
+{% extends 'main/layout.html' %}
+
+{% block aboba2 %}
+    <h1>{{ peg.name }}</h1>
+    <p>{{ peg.weight }}</p>
+    <a href="{% url 'db-delete' peg.id %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'db-update' peg.id %}" class="btn btn-info">Edit</a>
+{% endblock %}
+
+{% block aboba1 %}
+    aboba1
+{% endblock %}

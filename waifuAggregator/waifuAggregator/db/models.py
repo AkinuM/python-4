@@ -7,6 +7,9 @@ class pegs(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return f'/db/{self.id}'
+
     class Meta:
         verbose_name = 'PEG'
         verbose_name_plural = 'PEGS'
