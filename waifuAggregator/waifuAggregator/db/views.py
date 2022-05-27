@@ -1,7 +1,8 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from .models import pegs
 from .forms import pegsForm
-from django.views.generic import DetailView, UpdateView, DeleteView
+from django.views.generic import DetailView, UpdateView, DeleteView, CreateView
 
 
 def db(request):
@@ -22,6 +23,11 @@ class PegsDeleteView(DeleteView):
     model = pegs
     success_url = '/db'
     template_name = 'db/db_delete.html'
+
+class RegisterView(CreateView):
+    form_class = UserCreationForm
+    success_url = '/'
+    template_name = 'db/register.html'
 
 def create(request):
     error = ''
