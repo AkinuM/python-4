@@ -22,7 +22,10 @@
 <!--            <a href="{% url 'db_home' %}"><li>Peg2</li></a>-->
 <!--            <a href="{% url 'create' %}"><li><button class="btn btn-info">Peg3</button></li></a>-->
             {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}"><li>{{ user.username }}</li></a>
+                <li>{{ user.username }}</li>
+                {% if user.is_staff %}
+                    <a href="{% url 'add-waifu' %}"><li><button class="btn btn-info">Add waifu</button></li></a>
+                {% endif %}
                 <a href="{% url 'logout' %}"><li><button class="btn btn-info">Log out</button></li></a>
             {% else %}
                 <a href="{% url 'register' %}"><li><button class="btn btn-info">Register</button></li></a>

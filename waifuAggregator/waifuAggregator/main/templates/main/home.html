@@ -1,0 +1,11 @@
+{% extends 'main/layout.html' %}
+
+{% block aboba2 %}
+    {% for waifu in waifus %}
+        <a href="{% url 'waifu-detail' waifu.id %}"><h1>{{ waifu.name }}</h1></a>
+    {% endfor %}
+{% endblock %}
+
+{% block aboba1 %}
+    Waifus
+{% endblock %}

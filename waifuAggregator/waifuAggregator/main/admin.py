@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Waifu, Rate, Comment
 
-# Register your models here.
+admin.site.register(Waifu)
+admin.site.register(Rate)
+admin.site.register(Comment)

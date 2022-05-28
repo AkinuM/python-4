@@ -42,7 +42,7 @@ aside ul li {
     display: inline-block;
     font-size: 30px;
     margin-top: 2px;
-
+    color: black;
     margin-inline: 10px;
     /*transition: transform .6s ease;*/
 }
@@ -60,6 +60,17 @@ aside ul a{
 
 main {
     color: white;
+}
+
+main ul {
+    list-style: none;
+    float: left;
+}
+
+main ul li {
+    display: inline-block;
+    margin-inline: 0px;
+    /*transition: transform .6s ease;*/
 }
 
 form {

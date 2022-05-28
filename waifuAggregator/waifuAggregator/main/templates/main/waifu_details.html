@@ -1,0 +1,40 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block aboba2 %}
+    <img src="{{ waifu.waifu_pic.url }}" width="100px">
+    <h1>{{ waifu.name }}</h1>
+    <p>{{ waifu.description }}</p>
+    <p>Rating: {{rating}}</p>
+    {% if user.is_authenticated %}
+        <p>Rate this waifu!</p>
+        <ul>
+            <a href="{% url 'add-waifu' %}"><li><button class="btn btn-info">1</button></li></a>
+            <a href="{% url 'add-waifu' %}"><li><button class="btn btn-info">2</button></li></a>
+            <a href="{% url 'add-waifu' %}"><li><button class="btn btn-info">3</button></li></a>
+            <a href="{% url 'add-waifu' %}"><li><button class="btn btn-info">4</button></li></a>
+            <a href="{% url 'add-waifu' %}"><li><button class="btn btn-info">5</button></li></a>
+        </ul><br><br><br>
+    {% else %}
+        <p>Authorization is required for rating!</p>
+    {% endif %}
+    {% if user.is_staff %}
+        <ul>
+            <a href="{% url 'waifu-delete' waifu.id %}"><li><button class="btn btn-info">Delete</button></li></a>
+            <a href="{% url 'waifu-edit' waifu.id %}"><li><button class="btn btn-info">Edit</button></li></a>
+        </ul>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.value }}<br>
+        <button class="btn btn-success" type="submit">Add comment</button>
+    </form>
+    {% for comment in comments %}
+        {{ comment.user.username }}<br>
+        {{ comment.value }}
+    {% endfor %}
+{% endblock %}
+
+{% block aboba1 %}
+    aboba1
+{% endblock %}

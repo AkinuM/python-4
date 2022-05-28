@@ -1,0 +1,14 @@
+{% extends 'main/layout.html' %}
+
+{% block aboba2 %}
+    <h1>Add waifu</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}<br>
+            <button class="btn btn-success" type="submit">Add waifu</button>
+        </form>
+{% endblock %}
+
+{% block aboba1 %}
+    Add waifu
+{% endblock %}
