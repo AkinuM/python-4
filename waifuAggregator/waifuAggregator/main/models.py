@@ -3,7 +3,8 @@ from django.db import models
 
 
 class Waifu(models.Model):
-    name = models.CharField('Name', max_length=50)
+    name = models.CharField('Name', max_length=20)
+    rating = models.FloatField('Rating', default=0.0)
     description = models.TextField('Description')
     waifu_pic = models.ImageField('Waifu pic', upload_to="images/")
 
@@ -25,6 +26,9 @@ class Rate(models.Model):
     def __str__(self):
         return self.value.__str__()
 
+    def get_absolute_url(self):
+        return f'/{self.waifu.id}'
+
     class Meta:
         unique_together = ('user', 'waifu')
         verbose_name = 'Rate'
@@ -37,6 +41,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def get_absolute_url(self):
+        return f'/{self.waifu.id}'
 
     class Meta:
         verbose_name = 'Comment'

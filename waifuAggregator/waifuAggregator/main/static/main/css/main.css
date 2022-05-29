@@ -1,15 +1,14 @@
 body {
-    background: burlywood;
+    font-family: Bradley Hand, cursive;
+    background: #0A0731;
 }
 
 aside {
     float: top;
-    background: aqua;
+    background: #000000;
     width: 100%;
     height: 60px;
     color: white;
-    border-bottom: 5px solid black;
-    margin-top: 0px;
 }
 
 /*aside img {*/
@@ -26,7 +25,7 @@ aside {
 /*}*/
 
 aside h1 {
-    margin-top: 3px;
+    margin-top: 7px;
     margin-left: 15px;
     font-size: 40px;
     Color: white;
@@ -41,8 +40,8 @@ aside ul {
 aside ul li {
     display: inline-block;
     font-size: 30px;
-    margin-top: 2px;
-    color: black;
+    margin-top: 9px;
+    color: white;
     margin-inline: 10px;
     /*transition: transform .6s ease;*/
 }
@@ -62,6 +61,11 @@ main {
     color: white;
 }
 
+.login {
+    margin-left: 43%;
+    margin-top: 100px;
+}
+
 main ul {
     list-style: none;
     float: left;
@@ -74,7 +78,78 @@ main ul li {
 }
 
 form {
-    width: 500px;
-    margin-left: 32%;
+    width: 700px;
+    margin-left: 30%;
     margin-top: 50px;
+}
+
+.preview {
+    padding: 2.5%;
+}
+
+.preview a {
+    color: white;
+    text-decoration: none;
+}
+
+.preview h4 {
+    margin-top: 10px;
+}
+
+.login_form {
+    width: 700px;
+    margin-left: 20%;
+    margin-top: 50px;
+}
+
+.add_waifu_form {
+    width: 700px;
+    margin-left: 13%;
+    margin-top: 50px;
+}
+
+.waifu_table {
+    max-width: 1100px;
+    margin: 0px auto;
+    margin-top: 25px;
+}
+
+.waifu_table h1 {
+    margin-left: 35%;
+}
+
+.waifus {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.star-rating{
+ font-size: 0;
+}
+.star-rating__wrap{
+ display: inline-block;
+ font-size: 1rem;
+}
+.star-rating__wrap:after{
+ content: "";
+ display: table;
+ clear: both;
+}
+.star-rating__ico{
+ float: right;
+ padding-left: 2px;
+ cursor: pointer;
+ color: #FFB300;
+}
+.star-rating__ico:last-child{
+ padding-left: 0;
+}
+.star-rating__input{
+ display: none;
+}
+.star-rating__ico:hover:before,
+.star-rating__ico:hover ~ .star-rating__ico:before,
+.star-rating__input:checked ~ .star-rating__ico:before
+{
+ content: "\f005";
 }

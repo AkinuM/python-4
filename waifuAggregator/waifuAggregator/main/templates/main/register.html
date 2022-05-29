@@ -1,16 +1,14 @@
 {% extends 'main/layout.html' %}
 
 {% block aboba2 %}
-    <dev class="features">
-        <h1>reg_user</h1>
+    <div class="login"><h1>Registration</h1></div>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}<br>
-            <button class="btn btn-success" type="submit">Reg user</button>
+            <button class="btn btn-success" type="submit">Registration</button>
         </form>
-    </dev>
 {% endblock %}
 
 {% block aboba1 %}
-    register
+    Registration
 {% endblock %}

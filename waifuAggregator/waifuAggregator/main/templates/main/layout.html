@@ -13,14 +13,8 @@
 </head>
 <body>
     <aside>
-<!--        <img src="{% static 'main/img/peg.jpg' %}">-->
-<!--        <span class="peg">Peg</span>-->
         <a href="{% url 'home' %}"><h1>WaifuAggregator</h1></a>
         <ul>
-
-<!--            <a href="{% url 'home' %}"><li>Peg1</li></a>-->
-<!--            <a href="{% url 'db_home' %}"><li>Peg2</li></a>-->
-<!--            <a href="{% url 'create' %}"><li><button class="btn btn-info">Peg3</button></li></a>-->
             {% if user.is_authenticated %}
                 <li>{{ user.username }}</li>
                 {% if user.is_staff %}

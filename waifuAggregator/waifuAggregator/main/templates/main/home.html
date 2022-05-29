@@ -1,9 +1,21 @@
 {% extends 'main/layout.html' %}
 
 {% block aboba2 %}
-    {% for waifu in waifus %}
-        <a href="{% url 'waifu-detail' waifu.id %}"><h1>{{ waifu.name }}</h1></a>
-    {% endfor %}
+    <div class="waifu_table">
+        <h1>The best waifus</h1>
+        <div class="waifus">
+            {% for waifu in waifus %}
+                <div class="preview">
+                    <a href="{% url 'waifu-detail' waifu.id %}">
+                        <img src="{{ waifu.waifu_pic.url }}" width="200px">
+                        <h4>{{ waifu.name }}</h4>
+                        <h4>Rating: {{ waifu.rating }}</h4>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block aboba1 %}
