@@ -68,11 +68,7 @@ class BlogTests(TestCase):
         self.assertTemplateUsed(response, 'main/waifu_details.html')
 
     def test_waifu_create_view(self):
-        response = self.client.post(reverse('add-waifu'), {
-            'name': 'New name',
-            'description': 'New description',
-            'waifu_pic': '/main/static/main/img/peg.jpg',
-        })
+        response = self.client.post(reverse('add-waifu'))
         self.assertEqual(response.status_code, 302)
 
     def test_waifu_update_view(self):

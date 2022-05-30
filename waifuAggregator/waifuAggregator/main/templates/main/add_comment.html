@@ -1,11 +1,14 @@
 {% extends 'main/layout.html' %}
 
 {% block aboba2 %}
-<h1>Add comment</h1>
+<div class="comment"><h1>Add comment</h1></div>
+
 <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}<br>
-    <button class="btn btn-success" type="submit">Add comment</button>
+    <div class="comment-form">
+        {% csrf_token %}
+        {{ form.as_p }}<br>
+        <button class="btn btn-success" type="submit">Add comment</button>
+    </div>
 </form>
 {% endblock %}
 

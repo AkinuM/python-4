@@ -2,13 +2,18 @@
 {% load static %}
 
 {% block aboba2 %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<img src="{{ waifu.waifu_pic.url }}" width="100px">
-<h1>{{ waifu.name }}</h1>
-<p>{{ waifu.description }}</p>
-<p>Rating: {{rating}}</p>
-{% if user.is_authenticated %}
-<p>Your rate: {{rate}}</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><br>
+<dev class="pic"><img src="{{ waifu.waifu_pic.url }}" width="400px"></dev>
+<dev class="desname">
+    <h1>{{ waifu.name }}</h1>
+    <p>{{ waifu.description }}</p>
+</dev>
+<dev>
+    <p>Rating: {{rating}}</p>
+    {% if user.is_authenticated %}
+    <p>Your rate: {{rate}}</p>
+</dev>
+
 <form method="post">
     {% csrf_token %}
     <div class="form-group">

@@ -164,4 +164,33 @@ form {
     margin-top: 70px;
 }
 
-.delete_form
+.delete_form {
+    margin-left: 35%;
+}
+
+.pic {
+    margin-top: 30px;
+    margin-left: 60px;
+    position: absolute;
+}
+
+.comment {
+    margin-left: 43%;
+    margin-top: 50px;
+}
+
+.comment-form {
+    margin-left: 15%;
+}
+
+.desname {
+    margin-left: 30%;
+    position: absolute;
+    margin-top: 20px;
+    font-size: 25px;
+    width: 1000px;
+}
+
+.desname h1{
+    font-size: 70px;
+}
