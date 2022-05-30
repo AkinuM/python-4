@@ -12,25 +12,41 @@
     <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
 </head>
 <body>
-    <aside>
-        <a href="{% url 'home' %}"><h1>WaifuAggregator</h1></a>
-        <ul>
-            {% if user.is_authenticated %}
-                <li>{{ user.username }}</li>
-                {% if user.is_staff %}
-                    <a href="{% url 'add-waifu' %}"><li><button class="btn btn-info">Add waifu</button></li></a>
-                {% endif %}
-                <a href="{% url 'logout' %}"><li><button class="btn btn-info">Log out</button></li></a>
-            {% else %}
-                <a href="{% url 'register' %}"><li><button class="btn btn-info">Register</button></li></a>
-                <a href="{% url 'login' %}"><li><button class="btn btn-info">Login</button></li></a>
-            {% endif %}
-        </ul>
-    </aside>
-    <main>
-        {% block aboba2 %}
-        {% endblock %}
-    </main>
+<aside>
+    <a href="{% url 'home' %}"><h1>WaifuAggregator</h1></a>
+    <ul>
+        {% if user.is_authenticated %}
+        <li>{{ user.username }}</li>
+        {% if user.is_staff %}
+        <a href="{% url 'add-waifu' %}">
+            <li>
+                <button class="btn btn-info">Add waifu</button>
+            </li>
+        </a>
+        {% endif %}
+        <a href="{% url 'logout' %}">
+            <li>
+                <button class="btn btn-info">Log out</button>
+            </li>
+        </a>
+        {% else %}
+        <a href="{% url 'register' %}">
+            <li>
+                <button class="btn btn-info">Register</button>
+            </li>
+        </a>
+        <a href="{% url 'login' %}">
+            <li>
+                <button class="btn btn-info">Login</button>
+            </li>
+        </a>
+        {% endif %}
+    </ul>
+</aside>
+<main>
+    {% block aboba2 %}
+    {% endblock %}
+</main>
 
 </body>
 </html>
