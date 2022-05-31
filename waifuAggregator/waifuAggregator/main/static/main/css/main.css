@@ -11,19 +11,6 @@ aside {
     color: white;
 }
 
-/*aside img {*/
-/*    width: 200px;*/
-/*    float: left;*/
-/*}*/
-
-/*aside .peg {*/
-/*    font-size: 40px;*/
-/*    margin-left: 10px;*/
-/*    font-weight: bold;*/
-/*    position: relative;*/
-/*    top: -5px;*/
-/*}*/
-
 aside h1 {
     margin-top: 7px;
     margin-left: 15px;
@@ -43,7 +30,6 @@ aside ul li {
     margin-top: 9px;
     color: white;
     margin-inline: 10px;
-    /*transition: transform .6s ease;*/
 }
 
 aside ul a {
@@ -51,11 +37,6 @@ aside ul a {
     color: black;
 }
 
-/*aside ul li:hover, aside ul a:hover {*/
-/*    color: white;*/
-/*    transform: scale(1);*/
-/*    display: inline-block;*/
-/*}*/
 
 main {
     color: white;
@@ -74,14 +55,8 @@ main ul {
 main ul li {
     display: inline-block;
     margin-inline: 0px;
-    /*transition: transform .6s ease;*/
 }
 
-form {
-    width: 700px;
-    margin-left: 30%;
-    margin-top: 50px;
-}
 
 .preview {
     padding: 2.5%;
@@ -98,13 +73,19 @@ form {
 
 .login_form {
     width: 700px;
-    margin-left: 20%;
+    margin-left: 38%;
+    margin-top: 50px;
+}
+
+.reg_form {
+    width: 700px;
+    margin-left: 30%;
     margin-top: 50px;
 }
 
 .add_waifu_form {
     width: 700px;
-    margin-left: 13%;
+    margin-left: 35%;
     margin-top: 50px;
 }
 
@@ -125,6 +106,7 @@ form {
 
 .star-rating {
     font-size: 0;
+    margin-left: 30px;
 }
 
 .star-rating__wrap {
@@ -165,11 +147,12 @@ form {
 }
 
 .delete_form {
-    margin-left: 35%;
+    margin-left: 44%;
+    margin-top: 30px;
 }
 
 .pic {
-    margin-top: 30px;
+    margin-top: 50px;
     margin-left: 60px;
     position: absolute;
 }
@@ -180,17 +163,85 @@ form {
 }
 
 .comment-form {
-    margin-left: 15%;
+    margin-left: 36%;
+    margin-top: 30px;
 }
 
 .desname {
     margin-left: 30%;
     position: absolute;
-    margin-top: 20px;
+    margin-top: 40px;
     font-size: 25px;
     width: 1000px;
 }
 
 .desname h1{
     font-size: 70px;
+}
+
+.rating {
+    position: absolute;
+    margin-left: 10%;
+    margin-top: 26%;
+    font-size: 30px;
+}
+
+.de {
+    position: absolute;
+    margin-left: 160px;
+}
+
+.rating_form {
+    position: absolute;
+    width: 250px;
+}
+
+.rating button {
+    margin-left: 45px;
+    margin-top: 10px;
+}
+
+.auth {
+    width: 300px;
+    color: red;
+}
+
+.comments {
+    position: absolute;
+    margin-left: 43%;
+    margin-top: 40%;
+    font-size: 40px;
+}
+
+.comment_title {
+    position: absolute;
+    margin-left: 43%;
+    margin-top: 40%;
+    font-size: 40px;
+}
+
+.comment_title button {
+    position: absolute;
+    margin-top: 55px;
+    width: 145px;
+}
+
+.comment_title p {
+    position: absolute;
+    margin-top: 55px;
+    width: 1000px;
+    color: red;
+}
+
+.comment-list {
+    position: absolute;
+    margin-left: 5%;
+    margin-top: 47%;
+    font-size: 25px;
+}
+
+.comment-list p {
+    width: 1700px;
+    border-bottom: 1px solid blue;
+    padding: 8px;
 }

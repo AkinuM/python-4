@@ -8,62 +8,75 @@
     <h1>{{ waifu.name }}</h1>
     <p>{{ waifu.description }}</p>
 </dev>
-<dev>
+<div class="rating">
     <p>Rating: {{rating}}</p>
     {% if user.is_authenticated %}
     <p>Your rate: {{rate}}</p>
-</dev>
 
-<form method="post">
-    {% csrf_token %}
-    <div class="form-group">
-        <label>Rate this waifu!</label>
-        <div class="star-rating">
-            <div class="star-rating__wrap">
-                <input class="star-rating__input" id="star-5" type="radio" name="value" value="5">
-                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-5"></label>
-                <input class="star-rating__input" id="star-4" type="radio" name="value" value="4">
-                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-4"></label>
-                <input class="star-rating__input" id="star-3" type="radio" name="value" value="3">
-                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-3"></label>
-                <input class="star-rating__input" id="star-2" type="radio" name="value" value="2">
-                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-2"></label>
-                <input class="star-rating__input" id="star-1" type="radio" name="value" value="1">
-                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-1"></label>
+
+    <form method="post">
+        <div class="rating_form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Rate this waifu!</label>
+                <div class="star-rating">
+                    <div class="star-rating__wrap">
+                        <input class="star-rating__input" id="star-5" type="radio" name="value" value="5">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-5"></label>
+                        <input class="star-rating__input" id="star-4" type="radio" name="value" value="4">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-4"></label>
+                        <input class="star-rating__input" id="star-3" type="radio" name="value" value="3">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-3"></label>
+                        <input class="star-rating__input" id="star-2" type="radio" name="value" value="2">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-2"></label>
+                        <input class="star-rating__input" id="star-1" type="radio" name="value" value="1">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-1"></label>
+                    </div>
+                </div>
             </div>
+            <button class="btn btn-success" type="submit">Add rate</button>
         </div>
+    </form>
+    {% else %}
+    <div class="auth">
+        <p>Authorization is required for rating!</p>
     </div>
-    <button class="btn btn-success" type="submit">Add rate</button>
-</form>
-{% else %}
-<p>Authorization is required for rating!</p>
-{% endif %}
-{% if user.is_staff %}
-<ul>
-    <a href="{% url 'waifu-delete' waifu.pk %}">
-        <li>
-            <button class="btn btn-info">Delete</button>
-        </li>
-    </a>
-    <a href="{% url 'waifu-edit' waifu.id %}">
-        <li>
-            <button class="btn btn-info">Edit</button>
-        </li>
-    </a>
-</ul><br><br><br>
-{% endif %}
-{% if user.is_authenticated %}
-<a href="{% url 'add-comment' waifu.id %}">
-    <button class="btn btn-info">Add comment</button>
-</a><br><br>
-{% else %}
-<p>Authorization is required for commenting!</p>
-{% endif %}
+    {% endif %}
+</div>
 
-{% for comment in comments %}
-{{ comment.user.username }}<br>
-{{ comment.value }}<br><br>
-{% endfor %}
+<dev class="de">
+    {% if user.is_staff %}
+    <ul>
+        <a href="{% url 'waifu-delete' waifu.pk %}">
+            <li>
+                <button class="btn btn-info">Delete</button>
+            </li>
+        </a>
+        <a href="{% url 'waifu-edit' waifu.id %}">
+            <li>
+                <button class="btn btn-info">Edit</button>
+            </li>
+        </a>
+    </ul>
+    <br><br><br>
+    {% endif %}
+</dev>
+<div class="comments">Comments</div>
+<div class="comment_title">
+    {% if user.is_authenticated %}
+    <a href="{% url 'add-comment' waifu.id %}">
+        <button class="btn btn-info">Add comment</button>
+    </a>
+    {% else %}
+    <p>Authorization is required for commenting!</p>
+    {% endif %}
+</div>
+<div class="comment-list">
+    {% for comment in comments %}
+    <h1>{{ comment.user.username }}</h1>
+    <p>{{ comment.value }}</p>
+    {% endfor %}
+</div>
 {% endblock %}
 
 {% block aboba1 %}
