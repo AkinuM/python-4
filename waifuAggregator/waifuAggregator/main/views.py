@@ -1,5 +1,7 @@
+import asyncio
 import logging
 
+from asgiref.sync import sync_to_async
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -13,9 +15,31 @@ from .models import Waifu, Rate, Comment
 
 logger = logging.getLogger('django')
 
+
+@sync_to_async()
+def get_ordered_waifus(str):
+    return Waifu.objects.order_by(str)
+
+@sync_to_async()
+def get_rate_waifu_user(waifu_id, user_username):
+    return Rate.objects.filter(waifu_id=waifu_id, user__username=user_username)
+
+@sync_to_async()
+def get_waifu(waifu_id):
+    return Waifu.objects.get(pk=waifu_id)
+
+@sync_to_async()
+def get_rate_waifu(waifu_id):
+    return Rate.objects.filter(waifu_id=waifu_id)
+
+@sync_to_async()
+def get_comment_waifu(waifu_id):
+    return Comment.objects.filter(waifu_id=waifu_id)
+
+
 class WaifusView(View):
     def get(self, request):
-        waifus = Waifu.objects.order_by('-rating')
+        waifus = asyncio.run(get_ordered_waifus('-rating'))
         return render(request, 'main/home.html', {'waifus': waifus})
 
 
@@ -39,14 +63,14 @@ class WaifuDetailView(CreateView):
 
     def form_valid(self, form):
         obj = form.save(commit=False)
-        rate = Rate.objects.filter(waifu_id=self.kwargs['pk'], user__username=self.request.user.username)
+        rate = asyncio.run(get_rate_waifu_user(self.kwargs['pk'], self.request.user.username))
         if len(rate):
             rate.delete()
         obj.value = self.request.POST.get('value')
         obj.user = self.request.user
-        obj.waifu = Waifu.objects.get(pk=self.kwargs['pk'])
+        obj.waifu = asyncio.run(get_waifu(self.kwargs['pk']))
         obj.save()
-        ratings = Rate.objects.filter(waifu_id=self.kwargs['pk'])
+        ratings = asyncio.run(get_rate_waifu(self.kwargs['pk']))
         value = 0.0
         count = len(ratings)
         for rate in ratings:
@@ -58,14 +82,14 @@ class WaifuDetailView(CreateView):
 
     def get_context_data(self, **kwargs):
         rating = super(WaifuDetailView, self).get_context_data(**kwargs)
-        rating['rating'] = Waifu.objects.get(pk=self.kwargs['pk']).rating
-        rate = Rate.objects.filter(waifu_id=self.kwargs['pk'], user__username=self.request.user.username)
+        rating['rating'] = asyncio.run(get_waifu(self.kwargs['pk'])).rating
+        rate = asyncio.run(get_rate_waifu_user(self.kwargs['pk'], self.request.user.username))
         if len(rate):
             rating['rate'] = rate[0].value
         else:
             rating['rate'] = 0
-        rating['comments'] = Comment.objects.filter(waifu_id=self.kwargs['pk'])
-        rating['waifu'] = Waifu.objects.get(pk=self.kwargs['pk'])
+        rating['comments'] = asyncio.run(get_comment_waifu(self.kwargs['pk']))
+        rating['waifu'] = asyncio.run(get_waifu(self.kwargs['pk']))
         return rating
 
 
@@ -98,9 +122,10 @@ class AddCommentView(UserPassesTestMixin, CreateView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.user = self.request.user
-        obj.waifu = Waifu.objects.get(pk=self.kwargs['pk'])
+        obj.waifu = asyncio.run(get_waifu(self.kwargs['pk']))
         obj.save()
         return super(AddCommentView, self).form_valid(form)
+
 
 class RegisterView(CreateView):
     form_class = UserCreationForm

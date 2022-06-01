@@ -5,3 +5,5 @@ Pillow==9.1.1
 psycopg2==2.9.3
 sqlparse==0.4.2
 unicode==2.8
+dj-database-url==0.5.0
+whitenoise==6.1.0
